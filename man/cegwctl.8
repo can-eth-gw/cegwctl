@@ -1,0 +1,221 @@
+.\"t
+.TH "CAN\-ETH\-GW" "8" "July 31, 2014" "CAN \- Ethernet Gateway Control Utility User Manual" "master\-preview"
+.SH NAME
+.PP
+cegwctl \- CAN \- Ethernet Gateway Control Utility
+.SH SYNOPSIS
+.PP
+\f[B]cegwctl\f[] [ \f[B]\-f\f[] | \f[B]\-\-can\-fd\f[] ] [ \f[B]\-t\f[]
+\f[I]TYPE\f[] | \f[B]\-\-type\f[]=\f[I]TYPE\f[] ] [ \f[B]\-b\f[] |
+\f[B]\-\-bidirectional\f[] ] \f[B]add\f[] \f[B]route\f[] \f[I]SRC\f[]
+\f[I]DST\f[]
+.PP
+\f[B]cegwctl\f[] [ \f[B]\-f\f[] | \f[B]\-\-can\-fd\f[] ] [ \f[B]\-t\f[]
+\f[I]TYPE\f[] | \f[B]\-\-type\f[]=\f[I]TYPE\f[] ] \f[B]add\f[]
+\f[B]dev\f[] [\f[I]NAME\f[]]
+.PP
+\f[I]TYPE\f[] := { \f[B]none\f[] | \f[B]eth\f[] | \f[B]net\f[] |
+\f[B]udp\f[] | \f[B]tcp\f[] }
+.PP
+\f[B]cegwctl\f[] \f[B]del\f[] \f[B]route\f[] \f[I]ID\f[]
+.PP
+\f[B]cegwctl\f[] \f[B]del\f[] \f[B]dev\f[] \f[I]NAME\f[]
+.PP
+\f[B]cegwctl\f[] \f[B]route\f[]
+.SH DESCRIPTION
+.PP
+Control Utility for the \f[C]ce_gw\f[] Kernel Programm.
+.SH OPTIONS
+.TP
+.B \f[B]\-b\f[], \f[B]\-\-bidirectional\f[]
+If you add a route from SRC to DST, there will be also add the same
+route back from DST to SRC.
+.RS
+.RE
+.TP
+.B \f[B]\-f\f[], \f[B]\-\-can\-fd\f[]
+A Flag for the larger CAN\-FD Frames.
+.RS
+.RE
+.TP
+.B \f[B]\-t\f[], \f[B]\-\-type\f[]=\f[I]TYPE\f[]
+Set The Type of the Gateway.
+\[aq]\f[B]net\f[]\[aq] is the Default.
+\f[B]udp\f[], \f[B]tcp\f[] are not supported yet.
+.RS
+.RE
+.TP
+.B \f[I]TYPE\f[] := { \f[B]none\f[] | \f[B]eth\f[] | \f[B]net\f[] |
+\f[B]udp\f[] | \f[B]tcp\f[] }
+Types
+.RS
+.RE
+.SH COMMANDS
+.TP
+.B \f[B]add route\f[] \f[I]SRC\f[] \f[I]DST\f[]
+Add a Gateway from \f[I]SRC\f[] to \f[I]DST\f[], where SRC and DST are
+the String names of the Interfaces.
+.RS
+.RE
+.TP
+.B \f[B]add dev\f[] [\f[I]NAME\f[]]
+Add a virtual ethernet device.
+You need this device for adding a route.
+\f[I]NAME\f[] will be the name of the new device.
+If you don\[aq]t set \f[I]NAME\f[], it will be called `cegw%d`, where %d
+is a consecutive number.
+With the options [ \f[B]\-f\f[] | \f[B]\-\-can\-fd\f[] ] [ \f[B]\-t\f[]
+\f[I]TYPE\f[] | \f[B]\-\-type\f[]=\f[I]TYPE\f[] ] you can set a
+meaningfull MTU.
+.RS
+.RE
+.PP
+.TS
+tab(@);
+l c l l.
+T{
+TYPE
+T}@T{
+FD?
+T}@T{
+BYTE
+T}@T{
+MTU Size Description
+T}
+_
+T{
+NONE
+T}@T{
+\-
+T}@T{
+1500
+T}@T{
+Standart Ethernet MTU
+T}
+T{
+ETH
+T}@T{
+✗
+T}@T{
+8
+T}@T{
+Max CAN Payload
+T}
+T{
+ETH
+T}@T{
+✔
+T}@T{
+64
+T}@T{
+Max CAN\-FD Payload
+T}
+T{
+NET
+T}@T{
+✗
+T}@T{
+16
+T}@T{
+Max CAN Frame
+T}
+T{
+NET
+T}@T{
+✔
+T}@T{
+72
+T}@T{
+Max CAN\-FD Frame
+T}
+T{
+UDP
+T}@T{
+\-
+T}@T{
+1500
+T}@T{
+Standart Ethernet MTU
+T}
+T{
+TCP
+T}@T{
+\-
+T}@T{
+1500
+T}@T{
+Standart Ethernet MTU
+T}
+.TE
+.TP
+.B \f[B]del route\f[] \f[I]ID\f[]
+Deletes the Gateway with \f[I]ID\f[].
+.RS
+.RE
+.TP
+.B \f[B]del dev\f[] \f[I]NAME\f[]
+Deletes a previously with \f[B]add\f[] \f[B]dev\f[] added device with
+\f[I]NAME\f[] as name.
+.RS
+.RE
+.TP
+.B \f[B]route\f[] [\f[I]ID\f[]]
+List active Gateways and Informations or if \f[I]ID\f[] is specified,
+Information of the Gateway with \f[I]ID\f[] will printed
+.RS
+.RE
+.SH EXAMPLES
+.SS Add a Gateway:
+.IP
+.nf
+\f[C]
+cegwctl\ \-f\ \-t\ net\ add\ route\ "eth0"\ "can0"
+\f[]
+.fi
+.SH EXIT STATUS
+.PP
+.TS
+tab(@);
+c l.
+T{
+CODE
+T}@T{
+Description
+T}
+_
+T{
+0
+T}@T{
+success
+T}
+T{
+!=0
+T}@T{
+failure
+T}
+.TE
+.SH COPYRIGHT
+.PP
+© Copyright 2013 Fabian Raab, Stefan Smarzly
+.PP
+This file is part of CAN\-Eth\-GW.
+.PP
+CAN\-Eth\-GW is free software: you can redistribute it and/or modify it
+under the terms of the GNU General Public License as published by the
+Free Software Foundation, either version 3 of the License, or (at your
+option) any later version.
+.PP
+CAN\-Eth\-GW is distributed in the hope that it will be useful, but
+WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+See the GNU General Public License for more details.
+You should have received a copy of the GNU General Public License along
+with CAN\-Eth\-GW.
+If not, see <http://www.gnu.org/licenses/>.
+.SH SEE ALSO
+.PP
+\f[B]Homepage:\f[] <http://can-eth-gw.github.io>
+.PP
+ip(8)
+.SH AUTHORS
+Fabian Raab <fabian.raab@tum.de>.

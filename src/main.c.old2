@@ -1,0 +1,84 @@
+/*****************************************************************************
+ * main.c - Control Area Network - Ethernet - Gateway - Control (Utility)
+ *****************************************************************************/
+
+/*****************************************************************************
+ * (C) Copyright 2013 Fabian Raab, Stefan Smarzly
+ *
+ * This file is part of CAN-Eth-GW.
+ *
+ * CAN-Eth-GW is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * CAN-Eth-GW is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with CAN-Eth-GW.  If not, see <http://www.gnu.org/licenses/>.
+ *****************************************************************************/
+
+/**
+ * The gateway is configured here.
+ */
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#include "netlink.h"
+
+void hyphen(int arg_counter, char *args[]){
+	if(args[0][1] == '-'){
+		if(strcmp(args[0], "--delete")){
+			// TODO del aufrufen
+			
+		} else if(strcmp(args[0], "--add")){
+			// TODO add aufrufen
+			
+		} else {
+			printf("unknown command");
+			
+		}
+	} else {
+		if(strcmp(args[0], "-a")){
+			// TODO add aufrufen
+		} else if(strcmp(args[0], "-d")){
+			// TODO delete aufrufen
+		}
+	}
+	// TODO short short forms e.g. -ad
+}
+
+int main(int arg_counter, char *args[]){
+	int name_pos = 1; /**< position of the command's name in *args[] */
+
+	while(args[name_pos][0] == '-' && name_pos < arg_counter){
+		char *new_args[arg_counter - name_pos]; /**< copy of args[] beginning at the actual position*/
+		int i; /**< needed for for loop */
+
+		for(i = 0; i < arg_counter - name_pos; i++){
+			new_args[i] = args[i + name_pos];
+		}
+		hyphen(arg_counter - name_pos, new_args);
+		name_pos++;
+	}
+	
+	if(strcmp(args[name_pos], "add")){
+		// TODO call add with (arg_counter, *args[])
+		
+	} else if(strcmp(args[name_pos], "del")){
+		// TODO call del with (arg_counter, *args[])
+		
+	} else if(strcmp(args[name_pos], "echo")){
+	    printf("%s",ce_gw_echo(args[name_pos + 1]));
+	    
+	} else {
+		printf("unknown command");
+		
+	}
+	return EXIT_SUCCESS;
+}
