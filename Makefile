@@ -59,5 +59,5 @@ install:
 	-cp "$(TARGET)" "/usr/local/bin/$(shell basename $(TARGET))"
 	-chmod +rx "/usr/local/bin/cegwctl"
 	-cp "./man/cegwctl.8" "/usr/share/man/man8/cegwctl.8"
-	-chmod +rx "/usr/share/man/man8/cegwctl.8"
+	-chmod +r "/usr/share/man/man8/cegwctl.8"
 
