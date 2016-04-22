@@ -20,25 +20,22 @@ Installation
 
 	make
 	make install
-	cd src/cegwsend/
-	make
-	make install
+
 
 Usage
 -----
 
-look for
+look for [manual](https://github.com/can-eth-gw/cegwctl/blob/master/man/cegwctl.8.md)
 
 	man cegwctl
-	man cegwsend
 
-how to use the commands.
+how to use the command.
 
 References
 ==========
 
 __Sources:__
-  [https://github.com/can-eth-gw/can-eth-gw-utils/](https://github.com/can-eth-gw/can-eth-gw-utils/ "Sources")
+  [https://github.com/can-eth-gw/cegwctl/](https://github.com/can-eth-gw/cegwctl/ "Sources")
 __Homepage:__
   [http://can-eth-gw.github.io/](http://can-eth-gw.github.io/ "Homepage")
 
