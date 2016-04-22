@@ -1,8 +1,5 @@
-Readme
-======
-
-cegwctl
-=======
+Readme cegwctl
+==============
 
 cegwctl - CAN - Ethernet Gateway Control Utility of CAN - Ethernet Gateway kernel module.
 
