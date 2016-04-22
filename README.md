@@ -1,26 +1,23 @@
 Readme
 ======
 
-can-eth-utils
-=============
+cegwctl
+=======
 
-Utilities to control and test the CAN - Ethernet Gateway kernel module.
+cegwctl - CAN - Ethernet Gateway Control Utility of CAN - Ethernet Gateway kernel module.
 
 Usage
 -----
 
-look for
+look for [manual](https://github.com/can-eth-gw/cegwctl/blob/master/man/cegwctl.8.md)
 
 	man cegwctl
-	man cegwsend
-
-how to use the commands.
 
 References
 ----------
 
 __Sources:__
-  [https://github.com/can-eth-gw/can-eth-gw-utils/](https://github.com/can-eth-gw/can-eth-gw-utils/ "Sources")
+  [https://github.com/can-eth-gw/cegwctl](https://github.com/can-eth-gw/cegwctl "Sources")
 __Homepage:__
   [http://can-eth-gw.github.io/](http://can-eth-gw.github.io/ "Homepage")
 
