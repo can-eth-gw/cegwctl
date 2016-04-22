@@ -1,8 +1,5 @@
-INSTALL
-=======
-
-can-eth-utils
-============
+INSTALL cegwctl
+===============
 
 Requirements:
 -------------
